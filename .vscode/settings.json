@@ -1,0 +1,20 @@
+{
+    "python-envs.pythonProjects": [
+        {
+            "path": "bmiwebsite/__pycache__",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip",
+            "workspace": "WebBMI"
+        },
+        {
+            "path": "bmiwebsite/__pycache__",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
+        },
+        {
+            "path": ".",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
+        }
+    ]
+}
