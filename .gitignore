@@ -1,5 +1,19 @@
-venv/
+# Python
 __pycache__/
 *.pyc
+
+# Virtual env
+venv/
+
+# Django
 db.sqlite3
+*.log
+
+# Static
+staticfiles/
+
+# Environment
 .env
+
+# VS Code
+.vscode/
