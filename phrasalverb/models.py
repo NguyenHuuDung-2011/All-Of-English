@@ -3,7 +3,10 @@ import re
 
 # Create your models here.
 class Verb(models.Model):
-    word = models.CharField(max_length=100, unique=True)
+    word = models.CharField(max_length=100, unique=True, db_index=True)
+
+    class Meta:
+        ordering = ['word']
 
     def __str__(self):
         return self.word
@@ -20,10 +23,13 @@ class Particle(models.Model):
         related_name='particles'
     )
 
-    preposition = models.CharField(max_length=50)
+    preposition = models.CharField(max_length=50, db_index=True)
 
     class Meta:
-        unique_together = ('verb', 'preposition')
+        ordering = ['preposition']
+        constraints = [
+            models.UniqueConstraint(fields=['verb', 'preposition'], name='unique_verb_preposition')
+        ]
 
     def __str__(self):
         return f"{self.verb.word} {self.preposition}"
@@ -44,6 +50,12 @@ class GrammarPattern(models.Model):
         max_length=200,
         help_text='vd: take up + noun'
     )
+
+    class Meta:
+        ordering = ['pattern']
+        constraints = [
+            models.UniqueConstraint(fields=['particle', 'pattern'], name='unique_particle_pattern')
+        ]
 
     def __str__(self):
         return self.pattern
@@ -71,3 +83,8 @@ class Meaning(models.Model):
 
     def __str__(self):
         return self.meaning[:50]
+    
+    def save(self, *args, **kwargs):
+        self.meaning = self.meaning.strip()
+        self.example = self.example.strip()
+        super().save(*args, **kwargs)
