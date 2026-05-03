@@ -17,3 +17,10 @@ staticfiles/
 
 # VS Code
 .vscode/
+
+# Data
+data/
+*.csv
+
+# Command
+commands/

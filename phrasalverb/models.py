@@ -61,7 +61,7 @@ class GrammarPattern(models.Model):
         return self.pattern
     
     def save(self, *args, **kwargs):
-        pattern = self.pattern.strip().lower()
+        pattern = self.pattern.strip()
 
         pattern = re.sub(r'\s+', ' ', pattern)
         pattern = re.sub(r'\s*\+\s*', ' + ', pattern)
